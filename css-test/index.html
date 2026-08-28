@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="no-select">
 
     <!-- Header Section -->
     <header class="navbar">
@@ -36,8 +36,64 @@
     <main class="main-content">
         <div class="container">
             
-            <!-- Test Card Container -->
-            <div class="card test-card" id="test-card">
+            <!-- Welcome / Start Screen Card -->
+            <div class="card welcome-card" id="welcome-card">
+                <div class="welcome-header">
+                    <div class="welcome-badge">
+                        <span class="badge-icon">💡</span> CSS Bo‘yicha Test Platformasi
+                    </div>
+                    <h1>CSS Bo‘yicha Bilimni Sinash Testi</h1>
+                    <p class="welcome-subtitle">Ushbu test CSS bo‘yicha bilimlaringizni sinash uchun mo‘ljallangan. Testni boshlashdan oldin quyidagi qoidalar va shartlar bilan tanishib chiqing.</p>
+                </div>
+
+                <div class="rules-grid">
+                    <div class="rule-box">
+                        <div class="rule-icon orange-icon">⏱</div>
+                        <div class="rule-details">
+                            <h4>20 Daqiqalik Vaqt Cheklovi</h4>
+                            <p>Test uchun jami <strong>20 daqiqa</strong> vaqt ajratilgan. Vaqt tugaganda test avtomatik ravishda yakunlanadi.</p>
+                        </div>
+                    </div>
+
+                    <div class="rule-box">
+                        <div class="rule-icon blue-icon">❓</div>
+                        <div class="rule-details">
+                            <h4>20 ta Tasodifiy Savol</h4>
+                            <p>Har bir foydalanuvchi uchun CSS mavzulari bo‘yicha savollar tasodifiy (random) tartibda beriladi.</p>
+                        </div>
+                    </div>
+
+                    <div class="rule-box">
+                        <div class="rule-icon red-icon">🚫</div>
+                        <div class="rule-details">
+                            <h4>Vkladka va Ekranga O‘tish Taqiqlanadi</h4>
+                            <p>Test vaqtida boshqa brauzer vkladkasiga yoki oynasiga o‘tish, skrinshot olish va kodni nusxalash cheklangan.</p>
+                        </div>
+                    </div>
+
+                    <div class="rule-box">
+                        <div class="rule-icon green-icon">📊</div>
+                        <div class="rule-details">
+                            <h4>Natija Ko‘rsatilmaydi</h4>
+                            <p>Test natijasi ekranda ko‘rsatilmaydi va avtomatik ravishda administratorning Google Sheets bazasiga yuboriladi.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="start-action">
+                    <button type="button" class="btn btn-primary btn-lg" id="btn-start-test">
+                        <span>TESTNI BOSHLASH</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                    <p class="start-disclaimer">Tugmani bosishingiz bilan 20 daqiqalik taymer ishga tushadi.</p>
+                </div>
+            </div>
+
+            <!-- Test Card Container (Hidden initially) -->
+            <div class="card test-card hidden" id="test-card">
                 
                 <!-- Progress Header -->
                 <div class="progress-header">
@@ -46,6 +102,15 @@
                         <div class="progress-fill" id="progress-fill" style="width: 5%;"></div>
                     </div>
                     <span class="progress-percentage" id="progress-percentage">5%</span>
+                    
+                    <!-- Timer Badge -->
+                    <div class="timer-badge" id="timer-badge">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <span id="timer-text">20:00</span>
+                    </div>
                 </div>
 
                 <!-- Question Section -->
@@ -89,7 +154,7 @@
             </div>
 
             <!-- Informational Cards Grid (Matching reference design) -->
-            <div class="info-grid" id="info-grid">
+            <div class="info-grid hidden" id="info-grid">
                 <div class="info-card">
                     <div class="info-icon green-bg">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -129,6 +194,28 @@
                 </div>
             </div>
 
+            <!-- Anti-Cheat Warning Modal -->
+            <div class="modal-backdrop hidden" id="cheat-warning-modal">
+                <div class="modal-card warning-modal-card">
+                    <div class="warning-icon-wrapper">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                            <line x1="12" y1="9" x2="12" y2="13"></line>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                    </div>
+                    <h3>OGOHLANTIRISH!</h3>
+                    <p class="warning-text">Test vaqtida boshqa vkladkaga yoki oynaga o‘tish taqiqlanadi!</p>
+                    <div class="warning-count-pill" id="warning-count-text">
+                        Ogohlantirish: 1 / 3
+                    </div>
+                    <p class="warning-note">Agar 3 marta vkladka almashtirilsa, test avtomatik ravishda yakunlanadi.</p>
+                    <button type="button" class="btn btn-primary" id="btn-continue-test">
+                        Testni davom ettirish
+                    </button>
+                </div>
+            </div>
+
             <!-- Submission Modal / Form Screen -->
             <div class="modal-backdrop hidden" id="submit-modal">
                 <div class="modal-card">
@@ -143,7 +230,7 @@
                             </svg>
                         </div>
                         <h3>Testni yakunlash</h3>
-                        <p>Natijalaringizni yuborish uchun ism va familiyangizni kiritishingiz shart.</p>
+                        <p id="submit-modal-desc">Natijalaringizni yuborish uchun ism va familiyangizni kiritishingiz shart.</p>
                     </div>
                     <form id="student-form" class="student-form">
                         <div class="form-group">
@@ -154,7 +241,6 @@
                             <label for="lastname">Familiyangiz <span class="required">*</span></label>
                             <input type="text" id="lastname" class="form-control" placeholder="Masalan: Karimov" required autocomplete="family-name">
                         </div>
-
 
                         <div class="form-actions">
                             <button type="button" class="btn btn-secondary" id="btn-back-to-test">

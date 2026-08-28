@@ -293,10 +293,26 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 0;
     const userAnswers = {}; // Map question id (1..20) -> selected option key ('A', 'B', 'C', 'D')
 
+    let isTestActive = false;
+    let isTestCompleted = false;
+    let timerInterval = null;
+    let timeRemaining = 20 * 60; // 20 minutes in seconds (1200s)
+    let warningCount = 0;
+    const MAX_WARNINGS = 3;
+
     // DOM Elements
+    const welcomeCard = document.getElementById('welcome-card');
+    const btnStartTest = document.getElementById('btn-start-test');
+    const testCard = document.getElementById('test-card');
+    const infoGrid = document.getElementById('info-grid');
+    const successCard = document.getElementById('success-card');
+    
     const questionCounter = document.getElementById('question-counter');
     const progressFill = document.getElementById('progress-fill');
     const progressPercentage = document.getElementById('progress-percentage');
+    const timerBadge = document.getElementById('timer-badge');
+    const timerText = document.getElementById('timer-text');
+    
     const questionTitle = document.getElementById('question-title');
     const codeContainer = document.getElementById('code-container');
     const codeBlock = document.getElementById('code-block');
@@ -305,15 +321,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnNext = document.getElementById('btn-next');
     
     const submitModal = document.getElementById('submit-modal');
+    const submitModalDesc = document.getElementById('submit-modal-desc');
     const studentForm = document.getElementById('student-form');
     const btnBackToTest = document.getElementById('btn-back-to-test');
     const btnSubmit = document.getElementById('btn-submit');
     const submitSpinner = document.getElementById('submit-spinner');
     const scriptUrlInput = document.getElementById('script-url');
-    
-    const testCard = document.getElementById('test-card');
-    const infoGrid = document.getElementById('info-grid');
-    const successCard = document.getElementById('success-card');
+
+    const cheatWarningModal = document.getElementById('cheat-warning-modal');
+    const btnContinueTest = document.getElementById('btn-continue-test');
+    const warningCountText = document.getElementById('warning-count-text');
 
     // Default or Saved Apps Script URL
     const USER_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxxNkBt4Y-mFv5tNAqTpyynD96A1mHPdzVf97WOyIWY395ohFGI-LAV-WFUHpnL9ZnC/exec';
@@ -521,6 +538,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Hide Modal and show Success View
+            isTestCompleted = true;
+            isTestActive = false;
+            if (timerInterval) clearInterval(timerInterval);
+
             closeSubmitModal();
             testCard.classList.add('hidden');
             infoGrid.classList.add('hidden');
@@ -529,7 +550,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (err) {
             console.error('Submission error:', err);
-            // Even in case of network issue, transition cleanly or alert user
+            isTestCompleted = true;
+            isTestActive = false;
+            if (timerInterval) clearInterval(timerInterval);
+
             closeSubmitModal();
             testCard.classList.add('hidden');
             infoGrid.classList.add('hidden');
@@ -541,6 +565,119 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Initial Render
+    // Start Test Handler
+    if (btnStartTest) {
+        btnStartTest.addEventListener('click', () => {
+            welcomeCard.classList.add('hidden');
+            testCard.classList.remove('hidden');
+            infoGrid.classList.remove('hidden');
+            isTestActive = true;
+            
+            startTimer();
+            renderQuestion();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // Timer Functions
+    function startTimer() {
+        updateTimerDisplay();
+        timerInterval = setInterval(() => {
+            if (timeRemaining > 0) {
+                timeRemaining--;
+                updateTimerDisplay();
+            } else {
+                clearInterval(timerInterval);
+                onTimeExpired();
+            }
+        }, 1000);
+    }
+
+    function updateTimerDisplay() {
+        if (!timerText) return;
+        const minutes = Math.floor(timeRemaining / 60);
+        const seconds = timeRemaining % 60;
+        const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+        const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+        
+        timerText.textContent = `${formattedMinutes}:${formattedSeconds}`;
+
+        if (timeRemaining <= 120 && timerBadge) { // Under 2 minutes
+            timerBadge.classList.add('warning');
+        }
+    }
+
+    function onTimeExpired() {
+        isTestActive = false;
+        if (submitModalDesc) {
+            submitModalDesc.textContent = "⏱ Vaqt tugadi! Javoblaringizni yuborish uchun ism va familiyangizni kiriting.";
+        }
+        openSubmitModal();
+    }
+
+    // Anti-Cheat & Security Guards
+    function triggerSecurityWarning() {
+        if (!isTestActive || isTestCompleted) return;
+        
+        warningCount++;
+        if (warningCountText) {
+            warningCountText.textContent = `Ogohlantirish: ${warningCount} / ${MAX_WARNINGS}`;
+        }
+
+        if (warningCount >= MAX_WARNINGS) {
+            isTestActive = false;
+            if (timerInterval) clearInterval(timerInterval);
+            if (submitModalDesc) {
+                submitModalDesc.textContent = "⚠️ Boshqa vkladkaga o'tishlar soni 3 martaga yetgani sababli test to'xtatildi. Javoblaringizni yuboring.";
+            }
+            if (cheatWarningModal) cheatWarningModal.classList.add('hidden');
+            openSubmitModal();
+        } else {
+            if (cheatWarningModal) cheatWarningModal.classList.remove('hidden');
+        }
+    }
+
+    if (btnContinueTest) {
+        btnContinueTest.addEventListener('click', () => {
+            if (cheatWarningModal) cheatWarningModal.classList.add('hidden');
+        });
+    }
+
+    // Detect Tab Switch / Window Blur
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+            triggerSecurityWarning();
+        }
+    });
+
+    window.addEventListener('blur', () => {
+        triggerSecurityWarning();
+    });
+
+    // Disable Right-Click Context Menu
+    document.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+    });
+
+    // Disable Copy, Cut, Paste
+    document.addEventListener('copy', (e) => e.preventDefault());
+    document.addEventListener('cut', (e) => e.preventDefault());
+    document.addEventListener('paste', (e) => e.preventDefault());
+
+    // Disable Developer Tools Shortcuts & PrintScreen
+    document.addEventListener('keydown', (e) => {
+        // F12 key
+        if (e.key === 'F12' || e.keyCode === 123) {
+            e.preventDefault();
+            return false;
+        }
+        // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, Ctrl+U, Ctrl+S, Ctrl+P
+        if (e.ctrlKey && (e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c') || e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S' || e.key === 'p' || e.key === 'P')) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    // Initial Setup
     renderQuestion();
 });
