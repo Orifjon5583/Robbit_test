@@ -5,77 +5,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const questions = [
         {
             id: 1,
-            topic: "CSS nima",
-            title: "1. CSS atamasi nimaning qisqartmasi hisoblanadi va u nimaga xizmat qiladi?",
+            topic: "Selektorlar",
+            title: "1. Quyidagi CSS selektorlaridan qaysisi id=\"header\" atributiga ega bo'lgan yagona HTML elementini tanlaydi?",
             options: [
-                "A) Cascading Style Sheets — Web-sahifalarning ko'rinishi va stilini bezash uchun xizmat qiladi",
-                "B) Computer System Styles — Kompyuter tizimi sozlamalarini boshqarish uchun xizmat qiladi",
-                "C) Creative Style Solutions — Rasmlar va videolarni tahrirlash uchun xizmat qiladi",
-                "D) Coding Style Syntax — Ma'lumotlar bazasi bilan ishlash uchun xizmat qiladi"
+                "A) .header { color: red; }",
+                "B) #header { color: red; }",
+                "C) *header { color: red; }",
+                "D) header { color: red; }"
             ]
         },
         {
             id: 2,
-            topic: "CSS ulash usullari",
-            title: "2. Tashqi (external) CSS faylini HTML hujjatiga ulash uchun qaysi teg va atributlardan to'g'ri foydalanilgan?",
-            code: `<link rel="stylesheet" href="style.css">`,
+            topic: "Color",
+            title: "2. Rangdagi shaffoflikni (opacity/transparency) belgilash uchun qaysi rang formati ishlatiladi?",
+            code: `.card {
+    background-color: rgba(37, 99, 235, 0.5);
+}`,
             options: [
-                "A) <script src=\"style.css\"></script>",
-                "B) <link rel=\"stylesheet\" href=\"style.css\">",
-                "C) <style src=\"style.css\"></style>",
-                "D) <css href=\"style.css\"></css>"
+                "A) HEX formati",
+                "B) RGB formati",
+                "C) RGBA formati (oxirgi a - alpha shaffoflik qiymati)",
+                "D) HSL formati"
             ]
         },
         {
             id: 3,
-            topic: "Selector",
-            title: "3. Quyidagi CSS kodi qaysi HTML elementlariga amal qiladi?",
-            code: `.card {
-    background-color: #ffffff;
-    border-radius: 8px;
-}`,
-            options: [
-                "A) Faqat <card> nomli maxsus HTML tegiga",
-                "B) id=\"card\" atributiga ega bo'lgan elementga",
-                "C) class=\"card\" atributiga ega bo'lgan barcha elementlarga",
-                "D) Saytdagi barcha div elementlariga"
-            ]
-        },
-        {
-            id: 4,
-            topic: "Color",
-            title: "4. Quyidagi CSS kodida color xossasi nimani o'zgartiradi?",
-            code: `h1 {
-    color: #2563eb;
-}`,
-            options: [
-                "A) h1 elementining orqa fon rangini",
-                "B) h1 elementining matn (harflar) rangini",
-                "C) h1 elementining chegarasi (border) rangini",
-                "D) h1 elementining soyasi rangini"
-            ]
-        },
-        {
-            id: 5,
-            topic: "Background",
-            title: "5. Quyidagi CSS kodi nima natija beradi?",
-            code: `body {
-    background-color: #f8fafc;
-    background-image: url('pattern.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-}`,
-            options: [
-                "A) Orqa fon takrorlanuvchi kichik naqsh holatida ko'rinadi",
-                "B) Orqa fon rasmi butun ekranni egallaydi va takrorlanmaydi",
-                "C) Orqa fon faqat sahifaning tepasida ko'rinadi",
-                "D) Orqa fon rasmi shaffof holatga keladi"
-            ]
-        },
-        {
-            id: 6,
             topic: "Font-size",
-            title: "6. Matn o'lchamini nisbiy (responsive) tarzda o'rnatish uchun qaysi birlik tavsiya etiladi?",
+            title: "3. Shrift o'lchamini brauzerning asosiy (root) shrift o'lchamiga nisbatan moslashuvchan (responsive) belgilash uchun qaysi o'lchov birligidan foydalaniladi?",
+            code: `h1 {
+    font-size: 2rem;
+}`,
             options: [
                 "A) px (Pixel)",
                 "B) rem (Root EM)",
@@ -84,195 +43,260 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         {
-            id: 7,
-            topic: "Font-family",
-            title: "7. Quyidagi CSS kodida sans-serif nima vazifani bajaradi?",
-            code: `p {
-    font-family: 'Inter', Arial, sans-serif;
+            id: 4,
+            topic: "Google Fonts",
+            title: "4. Tashqi Google Fonts shriftini HTML hujjatining <head> qismiga ulash uchun qaysi teg ishlatiladi?",
+            code: `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">`,
+            options: [
+                "A) <script>",
+                "B) <link>",
+                "C) <font>",
+                "D) <style>"
+            ]
+        },
+        {
+            id: 5,
+            topic: "Box Model",
+            title: "5. Element kengligiga padding va border o'lchamlarini kiritib, umumiy kenglik oshib ketishining oldini oluvchi xossa qaysi?",
+            code: `* {
+    box-sizing: border-box;
 }`,
             options: [
-                "A) Asosiy font bo'lib xizmat qiladi",
-                "B) Inter va Arial fontlari kompyuterda bo'lmasa, zaxira (fallback) shrift sifatida ishlatiladi",
-                "C) Matnni qalin (bold) ko'rinishga keltirib beradi",
-                "D) Matn burchaklarini yumaloqlaydi"
+                "A) box-sizing: content-box;",
+                "B) box-sizing: border-box;",
+                "C) box-sizing: padding-box;",
+                "D) display: block;"
+            ]
+        },
+        {
+            id: 6,
+            topic: "Margin",
+            title: "6. Belgilangan kenglikka ega bo'lgan blok (block) elementni sahifaning gorizontal o'rtasiga keltirish uchun qaysi margin kodi ishlatiladi?",
+            code: `.container {
+    width: 800px;
+    margin: 0 auto;
+}`,
+            options: [
+                "A) margin: center;",
+                "B) margin: 0 auto;",
+                "C) margin: auto 0;",
+                "D) margin: 10px 10px;"
+            ]
+        },
+        {
+            id: 7,
+            topic: "Padding",
+            title: "7. CSS Box Model'da padding va margin o'rtasidagi asosiy farq nimadan iborat?",
+            code: `.box {
+    margin: 20px;
+    padding: 15px;
+}`,
+            options: [
+                "A) padding - element chegarasidan tashqaridagi masofa, margin - ichki masofa",
+                "B) padding - element chegarasi ichidagi masofa, margin - tashqi masofa",
+                "C) Ikkalasi ham bir xil vazifani bajaradi",
+                "D) padding faqat rang berish uchun ishlatiladi"
             ]
         },
         {
             id: 8,
-            topic: "Text-align",
-            title: "8. Quyidagi CSS kodi nima natija beradi?",
-            code: `p {
-    color: blue;
-    font-size: 20px;
-    text-align: center;
-}`,
-            options: [
-                "A) Matn ko'k rangda, 20px o'lchamda va chap tomonga tekislanadi",
-                "B) Matn ko me ko'k rangda, 20px o'lchamda va o'rtaga tekislanadi",
-                "C) Matn qizil rangda, 20px o'lchamda va o'rtaga tekislanadi",
-                "D) Matn ko'k rangda, 30px o'lchamda va o'rtaga tekislanadi"
-            ]
-        },
-        {
-            id: 9,
-            topic: "Margin",
-            title: "9. Elementni vertikal 20px va gorizontal o'rtaga joylashtirish uchun qaysi margin qisqa kodi to'g'ri?",
-            code: `.container {
-    width: 800px;
-    margin: 20px auto;
-}`,
-            options: [
-                "A) margin: 20px auto;",
-                "B) margin: auto 20px;",
-                "C) margin: 20px 20px;",
-                "D) margin: center 20px;"
-            ]
-        },
-        {
-            id: 10,
-            topic: "Padding",
-            title: "10. Elementning ichki masofasini (padding) belgilovchi ushbu kod nimani anglatadi?",
-            code: `.box {
-    padding: 10px 20px 15px 5px;
-}`,
-            options: [
-                "A) Tepadan 10px, o'ngdan 20px, pastdan 15px, chapdan 5px",
-                "B) Chapdan 10px, pastdan 20px, o'ngdan 15px, tepadan 5px",
-                "C) Barcha tomonlardan 10px va 20px dan",
-                "D) Tepadan va chapdan 10px, o'ngdan va pastdan 20px"
-            ]
-        },
-        {
-            id: 11,
             topic: "Border",
-            title: "11. Quyidagi kod orqali element atrofida qanday chegara hosil bo'ladi?",
-            code: `.btn {
+            title: "8. Quyidagi CSS kodi element atrofida qanday chegara hosil qiladi?",
+            code: `.card {
     border: 2px solid #2563eb;
+    border-radius: 12px;
 }`,
             options: [
-                "A) 2px qalinlikdagi uzuk-uzuk (dashed) ko'k chegara",
-                "B) 2px qalinlikdagi yaxlit (solid) ko'k chegara",
-                "C) 2px qalinlikdagi nuqtali (dotted) qizil chegara",
+                "A) 2px uzuk-uzuk chiziqli ko'k chegara va to'g'ri burchak",
+                "B) 2px yaxlit ko'k chegara va 12px yumaloqlashgan burchaklar",
+                "C) 12px qalinlikdagi qizil chegara",
                 "D) Chegara umuman ko'rinmaydi"
             ]
         },
         {
-            id: 12,
-            topic: "Width",
-            title: "12. Element kengligini ota element kengligining yarmiga tenglashtirish uchun qaysi qiymat beriladi?",
+            id: 9,
+            topic: "Flexbox Direction",
+            title: "9. Flexbox container ichidagi elementlarni vertikal (ustun shaklida) joylashtirish uchun qaysi xossa ishlatiladi?",
+            code: `.flex-container {
+    display: flex;
+    flex-direction: column;
+}`,
             options: [
-                "A) width: 50px;",
-                "B) width: 50%;",
-                "C) width: 50vw;",
-                "D) width: half;"
+                "A) flex-direction: row;",
+                "B) flex-direction: column;",
+                "C) flex-wrap: wrap;",
+                "D) align-items: stretch;"
+            ]
+        },
+        {
+            id: 10,
+            topic: "Flexbox Justify",
+            title: "10. Flexbox container ichidagi elementlarni asosiy o'q bo'yicha chetki va o'rta masofalarni teng bo'lib joylashtirish uchun qaysi qiymat ishlatiladi?",
+            code: `.navbar {
+    display: flex;
+    justify-content: space-between;
+}`,
+            options: [
+                "A) justify-content: flex-start;",
+                "B) justify-content: space-between;",
+                "C) justify-content: center;",
+                "D) align-content: space-around;"
+            ]
+        },
+        {
+            id: 11,
+            topic: "Flexbox Align",
+            title: "11. Flexbox container ichidagi elementlarni ikkinchi o'q (cross axis) bo'yicha vertikal o'rtaga keltirish uchun qaysi xossa ishlatiladi?",
+            code: `.header {
+    display: flex;
+    align-items: center;
+}`,
+            options: [
+                "A) align-items: center;",
+                "B) justify-content: top;",
+                "C) text-align: middle;",
+                "D) float: center;"
+            ]
+        },
+        {
+            id: 12,
+            topic: "Flexbox Wrap & Gap",
+            title: "12. Flexbox container ichidagi elementlar sig'may qolganda ularni avtomatik keyingi qatorga o'tkazish va oraliq masofa berish uchun qaysi xossalar ishlatiladi?",
+            code: `.grid-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}`,
+            options: [
+                "A) flex-wrap: nowrap; va margin: 0;",
+                "B) flex-wrap: wrap; va gap: 20px;",
+                "C) display: block; va padding: 20px;",
+                "D) flex-direction: inline;"
             ]
         },
         {
             id: 13,
-            topic: "Height",
-            title: "13. Elementning minimal balandligini ekranning to'liq balandligiga tenglashtirish uchun qaysi kod ishlatiladi?",
+            topic: "Grid Columns",
+            title: "13. CSS Grid'da teng 3 ustunli tarmoq (layout) yaratish uchun qaysi qisqa kod ishlatiladi?",
+            code: `.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}`,
             options: [
-                "A) min-height: 100%;",
-                "B) min-height: 100vh;",
-                "C) height: 100px;",
-                "D) max-height: 100 screen;"
+                "A) grid-template-columns: 3fr;",
+                "B) grid-template-columns: repeat(3, 1fr);",
+                "C) grid-columns: 3;",
+                "D) display: flex; flex-columns: 3;"
             ]
         },
         {
             id: 14,
-            topic: "Display",
-            title: "14. Quyidagi display qiymatlaridan qaysisi elementni ekranda umuman ko'rsatmaydi va o'rnini ham saqlamaydi?",
+            topic: "Grid Gap",
+            title: "14. CSS Grid katakchalari (cell) orasidagi vertikal va gorizontal bo'shliqni o'rnatuvchi xossa qaysi?",
+            code: `.gallery {
+    display: grid;
+    gap: 15px;
+}`,
             options: [
-                "A) display: block;",
-                "B) display: inline;",
-                "C) display: none;",
-                "D) display: hidden;"
+                "A) margin-box: 15px;",
+                "B) gap: 15px; (yoki grid-gap: 15px;)",
+                "C) padding-grid: 15px;",
+                "D) cell-spacing: 15px;"
             ]
         },
         {
             id: 15,
-            topic: "Flexbox",
-            title: "15. Flexbox container ichidagi elementlarni gorizontal o'q bo'yicha o'rtaga joylashtirish uchun qaysi xossa ishlatiladi?",
-            code: `.flex-container {
-    display: flex;
-    justify-content: center;
+            topic: "Grid Column Span",
+            title: "15. CSS Grid elementini ketma-ket 2 ta ustun kengligicha egallashi (cho'zilishi) uchun qaysi xossa yoziladi?",
+            code: `.featured-card {
+    grid-column: span 2;
 }`,
             options: [
-                "A) align-items: center;",
-                "B) justify-content: center;",
-                "C) flex-direction: center;",
-                "D) text-align: middle;"
+                "A) grid-column: span 2;",
+                "B) grid-width: 2;",
+                "C) column-span: all;",
+                "D) flex-grow: 2;"
             ]
         },
         {
             id: 16,
-            topic: "Position",
-            title: "16. Sahifa scroll qilinganda ham ekranning ma'lum bir joyida qimirlamay turadigan position qiymati qaysi?",
+            topic: "Grid Place Items",
+            title: "16. CSS Grid ichidagi elementi bir vaqtning o'zida ham gorizontal, ham vertikal tamomila o'rtaga keltirish uchun qaysi qisqa xossa ishlatiladi?",
+            code: `.hero-grid {
+    display: grid;
+    place-items: center;
+}`,
             options: [
-                "A) position: relative;",
-                "B) position: absolute;",
-                "C) position: fixed;",
-                "D) position: static;"
+                "A) align-content: middle;",
+                "B) place-items: center;",
+                "C) grid-align: center;",
+                "D) text-align: center;"
             ]
         },
         {
             id: 17,
-            topic: "Border-radius",
-            title: "17. Kvadrat shaklidagi elementni mukammal doira (circle) holatiga keltirish uchun border-radius nechaga teng bo'lishi kerak?",
-            code: `.avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+            topic: "Position Absolute",
+            title: "17. Elementga position: absolute; berilganda, u qaysi ota elementga nisbatan joylashadi?",
+            code: `.parent {
+    position: relative;
+}
+.child {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }`,
             options: [
-                "A) 10px",
-                "B) 25%",
-                "C) 50%",
-                "D) 100px 0"
+                "A) Har doim brauzer oynasining eng tepasiga nisbatan",
+                "B) position qiymati static bo'lmagan eng yaqin ota elementga nisbatan",
+                "C) Faqat <body> tegiga nisbatan",
+                "D) Qo'shni elementga nisbatan"
             ]
         },
         {
             id: 18,
-            topic: "Box-shadow",
-            title: "18. Quyidagi CSS box-shadow kodidagi 3-qiymat (10px) nimani anglatadi?",
-            code: `.card {
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            topic: "Position Fixed",
+            title: "18. Sahifa scroll qilinganda ham ekranning belgilangan joyida qimirlamay yopishib turadigan position qiymati qaysi?",
+            code: `.navbar-fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
 }`,
             options: [
-                "A) Soya gorizontal surilishi (offset-x)",
-                "B) Soya vertikal surilishi (offset-y)",
-                "C) Soyaning xiralashish darajasi (blur radius)",
-                "D) Soyaning tarqalish darajasi (spread radius)"
+                "A) position: static;",
+                "B) position: relative;",
+                "C) position: fixed;",
+                "D) position: inherit;"
             ]
         },
         {
             id: 19,
-            topic: "Hover",
-            title: "19. Foydalanuvchi sichqoncha ko'rsatkichini tugma ustiga olib borganda stili o'zgarishi uchun qaysi psevdo-klass ishlatiladi?",
-            code: `.button:hover {
-    background-color: #1d4ed8;
-}`,
-            options: [
-                "A) .button:active",
-                "B) .button:hover",
-                "C) .button:focus",
-                "D) .button:visited"
-            ]
-        },
-        {
-            id: 20,
-            topic: "Media query",
-            title: "20. Quyidagi media query qanday qurilmalar uchun amal qiladi?",
+            topic: "Media Query",
+            title: "19. Ekran kengligi 768px va undan kichik bo'lgan mobil qurilmalar uchun stillar yozishda qaysi Media Query strukturasi to'g'ri?",
             code: `@media (max-width: 768px) {
     .sidebar {
         display: none;
     }
 }`,
             options: [
-                "A) Ekran kengligi 768px va undan katta bo'lgan kompyuterlar uchun",
-                "B) Ekran kengligi 768px yoki undan kichik bo'lgan mobil va tablet qurilmalar uchun",
-                "C) Faqat barcha turdagi printerlar uchun",
-                "D) Faqat 4K o'lchamli televizorlar uchun"
+                "A) @media (min-width: 768px)",
+                "B) @media (max-width: 768px)",
+                "C) @device (screen-width: 768px)",
+                "D) @responsive (mobile: 768px)"
+            ]
+        },
+        {
+            id: 20,
+            topic: "Z-Index",
+            title: "20. Elementlarning ustma-ust (z-o'qi bo'yicha) qatlamlanish tartibini belgilovchi z-index xossasi ishlashi uchun elementda qaysi shart bajarilgan bo'lishi kerak?",
+            code: `.modal {
+    position: relative;
+    z-index: 100;
+}`,
+            options: [
+                "A) Element display: none; bo'lishi kerak",
+                "B) Elementning position qiymati static'dan boshqa qiymatga (relative, absolute, fixed, sticky) ega bo'lishi kerak",
+                "C) Elementda margin bo'lishi shart",
+                "D) Element faqat matn bo'lishi kerak"
             ]
         }
     ];
