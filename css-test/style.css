@@ -181,8 +181,70 @@ body {
     color: var(--text-secondary);
     font-size: 0.98rem;
     max-width: 680px;
-    margin: 0 auto 2rem auto;
+    margin: 0 auto 1.5rem auto;
     line-height: 1.6;
+}
+
+/* Subject Selector Container */
+.subject-selector {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0 2rem 0;
+}
+
+.subject-btn {
+    flex: 1;
+    max-width: 240px;
+    background-color: #f8fafc;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+}
+
+.subject-btn:hover {
+    border-color: var(--primary-blue-border);
+    background-color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.subject-btn.active {
+    border-color: var(--primary-blue);
+    background-color: var(--primary-blue-light);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.subject-btn-icon {
+    font-size: 1.75rem;
+}
+
+.subject-btn-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark-navy);
+}
+
+.subject-btn-desc {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+}
+
+.subject-tag {
+    background-color: var(--primary-blue-light);
+    color: var(--primary-blue);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
 }
 
 /* Rules Grid */

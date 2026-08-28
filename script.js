@@ -1,8 +1,263 @@
 // CSS Test Application Logic
 document.addEventListener('DOMContentLoaded', () => {
     
-    // 20 CSS Questions Data (Note: NO answer keys stored in client JS)
-    const questions = [
+    // 20 HTML Questions Data (Based on 6 Course Topics)
+    const htmlQuestions = [
+        {
+            id: 1,
+            topic: "Web-dasturlash va HTML",
+            title: "1. Web-sahifalarning strukturasi va mazmunini yaratish uchun ishlatiladigan HTML nimaning qisqartmasi hisoblanadi?",
+            options: [
+                "A) HyperText Markup Language — Web-sahifalarning asosiy strukturasi va matnli belgilash tili",
+                "B) HighTech Machine Language — Kompyuter qurilmalarini boshqarish tili",
+                "C) Hyperlink Terminal Model — Brauzerlararo aloqa protokoli",
+                "D) Home Tool Management Syntax — Ma'lumotlar bazasini tuzish formati"
+            ]
+        },
+        {
+            id: 2,
+            topic: "HTML5 Doctype",
+            title: "2. Hujjat HTML5 standartida yozilayotganini brauzerga bildiruvchi eng birinchi deklaratsiya kodi qaysi?",
+            code: `<!DOCTYPE html>`,
+            options: [
+                "A) <html version=\"5.0\">",
+                "B) <!DOCTYPE html>",
+                "C) <doctype html5>",
+                "D) <meta charset=\"html5\">"
+            ]
+        },
+        {
+            id: 3,
+            topic: "VS Code va Brauzer",
+            title: "3. HTML faylini brauzer to'g'ri o'qishi uchun fayl qanday kengaytma (extension) bilan saqlanishi kerak?",
+            options: [
+                "A) index.css",
+                "B) index.html",
+                "C) index.js",
+                "D) index.txt"
+            ]
+        },
+        {
+            id: 4,
+            topic: "Sarlavhalar (h1-h6)",
+            title: "4. HTMLda eng muhim va eng katta hajmga ega sarlavha yaratuvchi teg qaysi?",
+            code: `<h1>Asosiy Sarlavha</h1>`,
+            options: [
+                "A) <h1>",
+                "B) <h6>",
+                "C) <head>",
+                "D) <header>"
+            ]
+        },
+        {
+            id: 5,
+            topic: "Paragraflar va Qator ko'chirish",
+            title: "5. Matn bo'lagini paragraf holatida yozish va matn ichida yangi qatorga o'tish (line break) uchun qaysi teglar to'g'ri biriktirilgan?",
+            code: `<p>Birinchi satr.<br>Ikkinchi satr.</p>`,
+            options: [
+                "A) <paragraph> va <next>",
+                "B) <p> va <br>",
+                "C) <text> va <hr>",
+                "D) <span> va <space>"
+            ]
+        },
+        {
+            id: 6,
+            topic: "Matn Formatlash",
+            title: "6. Matn ichidagi muhim so'zni qalin (bold) va ta'kidlangan (italic) ko'rinishga keltiruvchi semantik teglar qaysi?",
+            code: `<strong>Muhim matn</strong> va <em>og'ma matn</em>`,
+            options: [
+                "A) <b-text> va <i-text>",
+                "B) <strong> va <em>",
+                "C) <big> va <font>",
+                "D) <mark> va <small>"
+            ]
+        },
+        {
+            id: 7,
+            topic: "Ro'yxatlar (ul, ol)",
+            title: "7. Tartibsiz (nuqtali) va tartibli (raqamli) ro'yxatlar yaratuvchi HTML teglar juftligi qaysi?",
+            code: `<ul>
+    <li>Birinchi element</li>
+</ul>`,
+            options: [
+                "A) <list> va <item>",
+                "B) <ul> (unordered list) va <ol> (ordered list)",
+                "C) <dl> va <dt>",
+                "D) <menu> va <select>"
+            ]
+        },
+        {
+            id: 8,
+            topic: "Rasmlar (img)",
+            title: "8. HTMLda sahifaga rasm joylashtirish va rasm manzili hamda muqobil matnini berish tegi qaysi?",
+            code: `<img src="nature.jpg" alt="Tabiat manzarasi">`,
+            options: [
+                "A) <picture href=\"nature.jpg\">",
+                "B) <img src=\"nature.jpg\" alt=\"Tabiat manzarasi\">",
+                "C) <image link=\"nature.jpg\">",
+                "D) <media file=\"nature.jpg\">"
+            ]
+        },
+        {
+            id: 9,
+            topic: "Rasm alt atributi",
+            title: "9. HTML <img src=\"...\"> tegida alt atributining asosiy vazifasi nimadan iborat?",
+            options: [
+                "A) Rasmning o'lchamini belgilaydi",
+                "B) Rasm yuklanmay qolganda yoki ekran o'quvchilar (screen readers) uchun muqobil matn ko'rsatadi",
+                "C) Rasm atrofida chegara hosil qiladi",
+                "D) Rasmni o'rtaga keltirib beradi"
+            ]
+        },
+        {
+            id: 10,
+            topic: "Linklar (a)",
+            title: "10. Boshqa sahifa yoki tashqi web-saytga o'tuvchi giperhavola (link) yaratish uchun qaysi teg va atribut ishlatiladi?",
+            code: `<a href="https://google.com">Google'ga o'tish</a>`,
+            options: [
+                "A) <link src=\"https://google.com\">",
+                "B) <a href=\"https://google.com\">Google'ga o'tish</a>",
+                "C) <url path=\"https://google.com\">",
+                "D) <goto link=\"https://google.com\">"
+            ]
+        },
+        {
+            id: 11,
+            topic: "Link target atributi",
+            title: "11. Havolaga bosilganda sahifani yangi vkladkada (tab) ochish uchun qaysi atribut beriladi?",
+            code: `<a href="https://example.com" target="_blank">Ochish</a>`,
+            options: [
+                "A) target=\"_self\"",
+                "B) target=\"_blank\"",
+                "C) open=\"newtab\"",
+                "D) mode=\"window\""
+            ]
+        },
+        {
+            id: 12,
+            topic: "Navigatsiya (Menyu)",
+            title: "12. Sahifa ichidagi ma'lum bir bo'limga (id atributli elementga) sakrash uchun havola href qiymatiga nima yoziladi?",
+            code: `<a href="#contact">Aloqa bo'limi</a>`,
+            options: [
+                "A) href=\"@contact\"",
+                "B) href=\"#contact\"",
+                "C) href=\".contact\"",
+                "D) href=\"$contact\""
+            ]
+        },
+        {
+            id: 13,
+            topic: "Semantik Teglar (Header)",
+            title: "13. Web-sahifaning yuqori qismi, logotip va sarlavhalar joylashadigan semantik teg qaysi?",
+            code: `<header>
+    <h1>Sayt Logotipi</h1>
+</header>`,
+            options: [
+                "A) <top>",
+                "B) <header>",
+                "C) <head>",
+                "D) <navbar>"
+            ]
+        },
+        {
+            id: 14,
+            topic: "Semantik Teglar (Nav)",
+            title: "14. Saytning asosiy navigatsiya havolalarini (menyu) o'rab turuvchi semantik HTML teg qaysi?",
+            code: `<nav>
+    <a href="#">Bosh sahifa</a>
+    <a href="#">Biz haqimizda</a>
+</nav>`,
+            options: [
+                "A) <menu-bar>",
+                "B) <nav>",
+                "C) <links>",
+                "D) <aside>"
+            ]
+        },
+        {
+            id: 15,
+            topic: "Semantik Teglar (Main)",
+            title: "15. Hujjatning takrorlanmas, noyob va asosiy kontentini o'rab turuvchi semantik teg qaysi?",
+            code: `<main>
+    <h2>Asosiy Maqola</h2>
+</main>`,
+            options: [
+                "A) <content>",
+                "B) <main>",
+                "C) <body>",
+                "D) <section>"
+            ]
+        },
+        {
+            id: 16,
+            topic: "Semantik Teglar (Footer)",
+            title: "16. Sahifaning eng pastki qismidagi mualliflik huquqlari (copyright) va kontakt ma'lumotlari joylashadigan teg qaysi?",
+            code: `<footer>
+    <p>&copy; 2026 Barcha huquqlar himoyalangan.</p>
+</footer>`,
+            options: [
+                "A) <bottom>",
+                "B) <footer>",
+                "C) <end>",
+                "D) <subfooter>"
+            ]
+        },
+        {
+            id: 17,
+            topic: "HTML Formlar",
+            title: "17. Foydalanuvchidan ma'lumotlarni yig'uvchi va serverga yuboruvchi forma yaratuvchi teg qaysi?",
+            code: `<form action="/submit" method="POST">
+    <!-- inputlar -->
+</form>`,
+            options: [
+                "A) <input-group>",
+                "B) <form>",
+                "C) <post>",
+                "D) <data>"
+            ]
+        },
+        {
+            id: 18,
+            topic: "Form Input Turlari",
+            title: "18. Foydalanuvchi kiritayotgan parolni ekranda nufuzli nuqtalar shaklida yashirib ko'rsatish uchun input type qiymati qanday beriladi?",
+            code: `<input type="password" name="user_pass">`,
+            options: [
+                "A) type=\"hidden\"",
+                "B) type=\"password\"",
+                "C) type=\"secret\"",
+                "D) type=\"text-mask\""
+            ]
+        },
+        {
+            id: 19,
+            topic: "Form Tanlovlar (Radio)",
+            title: "19. Bir nechta variatdan faqat BITTASINI tanlash imkonini beruvchi forma elementi qaysi?",
+            code: `<input type="radio" name="gender" value="male"> Erkak
+<input type="radio" name="gender" value="female"> Ayol`,
+            options: [
+                "A) <input type=\"checkbox\">",
+                "B) <input type=\"radio\">",
+                "C) <input type=\"select\">",
+                "D) <input type=\"toggle\">"
+            ]
+        },
+        {
+            id: 20,
+            topic: "Form Tugmalar va Validation",
+            title: "20. Formadagi katak to'ldirilishi MAJBURATINI yuklovchi HTML atributi qaysi?",
+            code: `<input type="text" name="username" required>`,
+            options: [
+                "A) mandatory",
+                "B) required",
+                "C) validate",
+                "D) important"
+            ]
+        }
+    ];
+
+    // 20 CSS Questions Data
+    const cssQuestions = [
         {
             id: 1,
             topic: "Selektorlar",
@@ -301,19 +556,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
-    // Fisher-Yates Shuffle Algorithm to randomize question order every test run
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    }
-
-    // Randomize questions order on page load
-    shuffleArray(questions);
-
-    // State Variables
+    // State Variables & Subject Data
+    let currentSubject = 'HTML'; // 'HTML' or 'CSS'
+    let questions = [];
     let currentIndex = 0;
     const userAnswers = {}; // Map question id (1..20) -> selected option key ('A', 'B', 'C', 'D')
 
@@ -327,6 +572,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // DOM Elements
     const welcomeCard = document.getElementById('welcome-card');
     const btnStartTest = document.getElementById('btn-start-test');
+    const startBtnLabel = document.getElementById('start-btn-label');
+    
+    const btnSelectHtml = document.getElementById('btn-select-html');
+    const btnSelectCss = document.getElementById('btn-select-css');
+    const activeSubjectBadge = document.getElementById('active-subject-badge');
+    const currentSubjectTag = document.getElementById('current-subject-tag');
+    const codeLangLabel = document.getElementById('code-lang-label');
+
     const testCard = document.getElementById('test-card');
     const infoGrid = document.getElementById('info-grid');
     const successCard = document.getElementById('success-card');
@@ -355,6 +608,44 @@ document.addEventListener('DOMContentLoaded', () => {
     const cheatWarningModal = document.getElementById('cheat-warning-modal');
     const btnContinueTest = document.getElementById('btn-continue-test');
     const warningCountText = document.getElementById('warning-count-text');
+
+    // Fisher-Yates Shuffle Algorithm to randomize question order every test run
+    function shuffleArray(array) {
+        const arr = [...array];
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    // Subject Switcher Logic
+    function setSubject(subjectName) {
+        currentSubject = subjectName;
+        if (subjectName === 'HTML') {
+            questions = shuffleArray(htmlQuestions);
+            if (btnSelectHtml) btnSelectHtml.classList.add('active');
+            if (btnSelectCss) btnSelectCss.classList.remove('active');
+            if (startBtnLabel) startBtnLabel.textContent = 'HTML TESTINI BOSHLASH';
+            if (activeSubjectBadge) activeSubjectBadge.textContent = '📄 HTML Test';
+            if (currentSubjectTag) currentSubjectTag.textContent = 'HTML';
+            if (codeLangLabel) codeLangLabel.textContent = 'html';
+        } else {
+            questions = shuffleArray(cssQuestions);
+            if (btnSelectCss) btnSelectCss.classList.add('active');
+            if (btnSelectHtml) btnSelectHtml.classList.remove('active');
+            if (startBtnLabel) startBtnLabel.textContent = 'CSS TESTINI BOSHLASH';
+            if (activeSubjectBadge) activeSubjectBadge.textContent = '🎨 CSS Test';
+            if (currentSubjectTag) currentSubjectTag.textContent = 'CSS';
+            if (codeLangLabel) codeLangLabel.textContent = 'css';
+        }
+    }
+
+    if (btnSelectHtml) btnSelectHtml.addEventListener('click', () => setSubject('HTML'));
+    if (btnSelectCss) btnSelectCss.addEventListener('click', () => setSubject('CSS'));
+
+    // Initialize Default Subject
+    setSubject('HTML');
 
     // Default or Saved Apps Script URL
     const USER_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxxNkBt4Y-mFv5tNAqTpyynD96A1mHPdzVf97WOyIWY395ohFGI-LAV-WFUHpnL9ZnC/exec';
@@ -538,6 +829,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const payload = {
             firstname: firstname,
             lastname: lastname,
+            subject: currentSubject, // 'HTML' or 'CSS'
             answers: userAnswers, // { 1: 'A', 2: 'B', ... }
             timestamp: new Date().toISOString()
         };

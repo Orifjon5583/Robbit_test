@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS Test Platformasi</title>
+    <title>HTML & CSS Test Platformasi</title>
     <!-- Google Fonts: Inter & Fira Code -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,16 +17,11 @@
         <div class="container navbar-container">
             <div class="brand">
                 <span class="logo-icon">&lt;/&gt;</span>
-                <span class="brand-title">CSS Test</span>
+                <span class="brand-title">HTML & CSS Test</span>
             </div>
             <div class="header-info">
-                <span class="info-badge">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="12" y1="16" x2="12" y2="12"></line>
-                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
-                    </svg>
-                    Test haqida
+                <span class="info-badge" id="active-subject-badge">
+                    📄 HTML Test
                 </span>
             </div>
         </div>
@@ -36,14 +31,28 @@
     <main class="main-content">
         <div class="container">
             
-            <!-- Welcome / Start Screen Card -->
+            <!-- Welcome / Subject Selection Screen Card -->
             <div class="card welcome-card" id="welcome-card">
                 <div class="welcome-header">
                     <div class="welcome-badge">
-                        <span class="badge-icon">💡</span> CSS Bo‘yicha Test Platformasi
+                        <span class="badge-icon">💡</span> Web Dasturlash Test Platformasi
                     </div>
-                    <h1>CSS Bo‘yicha Bilimni Sinash Testi</h1>
-                    <p class="welcome-subtitle">Ushbu test CSS bo‘yicha bilimlaringizni sinash uchun mo‘ljallangan. Testni boshlashdan oldin quyidagi qoidalar va shartlar bilan tanishib chiqing.</p>
+                    <h1>Test Fannini Tanlang</h1>
+                    <p class="welcome-subtitle">O‘zingiz bilimingizni sinab ko‘rmoqchi bo‘lgan fanni tanlang va testni boshlang.</p>
+
+                    <!-- Dual Subject Selector Buttons -->
+                    <div class="subject-selector">
+                        <button type="button" class="subject-btn active" id="btn-select-html" data-subject="HTML">
+                            <span class="subject-btn-icon">📄</span>
+                            <span class="subject-btn-title">HTML Test</span>
+                            <span class="subject-btn-desc">20 ta savol</span>
+                        </button>
+                        <button type="button" class="subject-btn" id="btn-select-css" data-subject="CSS">
+                            <span class="subject-btn-icon">🎨</span>
+                            <span class="subject-btn-title">CSS Test</span>
+                            <span class="subject-btn-desc">20 ta savol</span>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="rules-grid">
@@ -59,7 +68,7 @@
                         <div class="rule-icon blue-icon">❓</div>
                         <div class="rule-details">
                             <h4>20 ta Tasodifiy Savol</h4>
-                            <p>Har bir foydalanuvchi uchun CSS mavzulari bo‘yicha savollar tasodifiy (random) tartibda beriladi.</p>
+                            <p>Har bir foydalanuvchi uchun darslik mavzulari bo‘yicha savollar tasodifiy (random) tartibda beriladi.</p>
                         </div>
                     </div>
 
@@ -82,7 +91,7 @@
 
                 <div class="start-action">
                     <button type="button" class="btn btn-primary btn-lg" id="btn-start-test">
-                        <span>TESTNI BOSHLASH</span>
+                        <span id="start-btn-label">HTML TESTINI BOSHLASH</span>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                             <line x1="5" y1="12" x2="19" y2="12"></line>
                             <polyline points="12 5 19 12 12 19"></polyline>
@@ -97,6 +106,7 @@
                 
                 <!-- Progress Header -->
                 <div class="progress-header">
+                    <span class="subject-tag" id="current-subject-tag">HTML</span>
                     <span class="question-counter" id="question-counter">1 / 20 savol</span>
                     <div class="progress-track">
                         <div class="progress-fill" id="progress-fill" style="width: 5%;"></div>
@@ -123,7 +133,7 @@
                             <span class="code-dot red"></span>
                             <span class="code-dot yellow"></span>
                             <span class="code-dot green"></span>
-                            <span class="code-lang">css</span>
+                            <span class="code-lang" id="code-lang-label">html</span>
                         </div>
                         <pre class="code-content"><code id="code-block"></code></pre>
                     </div>
@@ -280,7 +290,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container footer-container">
-            <p>© 2026 CSS Test Platformasi</p>
+            <p>© 2026 HTML & CSS Test Platformasi</p>
         </div>
     </footer>
 

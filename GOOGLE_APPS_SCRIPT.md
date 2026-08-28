@@ -1,10 +1,10 @@
-# Google Apps Script va Sizning Google Sheets Jadvalingiz Integratsiyasi
+# Google Apps Script va Sizning Google Sheets Jadvalingiz Integratsiyasi (HTML & CSS)
 
 Siz taqdim etgan Google Sheets havolasi:  
 🔗 **[Google Sheets Jadvalingiz](https://docs.google.com/spreadsheets/d/1mG63yijZTh-QWUY_PR-ENDIZEifwD-E7oBGV8Wh5pbU/edit?usp=sharing)**  
 (Spreadsheet ID: `1mG63yijZTh-QWUY_PR-ENDIZEifwD-E7oBGV8Wh5pbU`)
 
-Ushbu yo'riqnoma orqali sayt test natijalarini to'g'ridan-to'g'ri **aynan shu jadvalingizga** yozib boradigan qilib ulaysiz.
+Ushbu yo'riqnoma orqali **HTML** va **CSS** test natijalarini to'g'ridan-to'g'ri **aynan shu jadvalingizga** yozib boradigan qilib ulaysiz.
 
 ---
 
@@ -13,9 +13,9 @@ Ushbu yo'riqnoma orqali sayt test natijalarini to'g'ridan-to'g'ri **aynan shu ja
 1. Taqdim etgan **[Google Sheets jadvalingizni](https://docs.google.com/spreadsheets/d/1mG63yijZTh-QWUY_PR-ENDIZEifwD-E7oBGV8Wh5pbU/edit?usp=sharing)** oching.
 2. Birinchi qatorga (1-qator) quyidagi ustun sarlavhalarini kiriting:
 
-| A1 ustun | B1 ustun | C1 ustun | D1 ustun | E1 ustun | F1 ustun |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Sana** | **Ism** | **Familiya** | **To‘g‘ri javoblar soni** | **Jami savollar** | **Foiz** |
+| A1 ustun | B1 ustun | C1 ustun | D1 ustun | E1 ustun | F1 ustun | G1 ustun |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Sana** | **Ism** | **Familiya** | **Fan** | **To‘g‘ri javoblar soni** | **Jami savollar** | **Foiz** |
 
 ---
 
@@ -26,12 +26,36 @@ Ushbu yo'riqnoma orqali sayt test natijalarini to'g'ridan-to'g'ri **aynan shu ja
 
 ```javascript
 /**
- * CSS Test Backend Server Code (Updated with new 20 questions key)
+ * HTML & CSS Test Backend Server Code
  * Target Sheet ID: 1mG63yijZTh-QWUY_PR-ENDIZEifwD-E7oBGV8Wh5pbU
  */
 
-// Server tomonidagi to'g'ri javoblar kaliti (Natijalar o'quvchiga ko'rsatilmaydi)
-const ANSWER_KEY = {
+// HTML Test javoblar kaliti (Natijalar o'quvchiga ko'rsatilmaydi)
+const ANSWER_KEY_HTML = {
+  1: 'A',
+  2: 'B',
+  3: 'B',
+  4: 'A',
+  5: 'B',
+  6: 'B',
+  7: 'B',
+  8: 'B',
+  9: 'B',
+  10: 'B',
+  11: 'B',
+  12: 'B',
+  13: 'B',
+  14: 'B',
+  15: 'B',
+  16: 'B',
+  17: 'B',
+  18: 'B',
+  19: 'B',
+  20: 'B'
+};
+
+// CSS Test javoblar kaliti (Natijalar o'quvchiga ko'rsatilmaydi)
+const ANSWER_KEY_CSS = {
   1: 'B',
   2: 'C',
   3: 'B',
@@ -71,12 +95,16 @@ function doPost(e) {
     const data = JSON.parse(e.postData.contents);
     const firstname = data.firstname || 'Noma\'lum';
     const lastname = data.lastname || 'Noma\'lum';
+    const subject = data.subject || 'HTML';
     const userAnswers = data.answers || {};
+
+    // Qaysi fan testiga qarab to'g'ri kalitni tanlash
+    const activeAnswerKey = (subject === 'CSS') ? ANSWER_KEY_CSS : ANSWER_KEY_HTML;
 
     // Server tomonida to'g'ri javoblarni hisoblash
     let correctCount = 0;
     for (let qId = 1; qId <= TOTAL_QUESTIONS; qId++) {
-      if (userAnswers[qId] && userAnswers[qId] === ANSWER_KEY[qId]) {
+      if (userAnswers[qId] && userAnswers[qId] === activeAnswerKey[qId]) {
         correctCount++;
       }
     }
@@ -87,11 +115,12 @@ function doPost(e) {
     // Toshkent vaqti bo'yicha sana shakllantirish
     const formattedDate = Utilities.formatDate(new Date(), 'Asia/Tashkent', 'dd.MM.yyyy HH:mm');
 
-    // Jadvalga ma'lumotni yozish (Sana | Ism | Familiya | To'g'ri javoblar | Jami | Foiz)
+    // Jadvalga ma'lumotni yozish (Sana | Ism | Familiya | Fan | To'g'ri javoblar | Jami | Foiz)
     sheet.appendRow([
       formattedDate,
       firstname,
       lastname,
+      subject + ' Test',
       correctCount,
       TOTAL_QUESTIONS,
       percentage
@@ -109,7 +138,7 @@ function doPost(e) {
 }
 
 function doGet(e) {
-  return ContentService.createTextOutput("CSS Test Backend ishlamoqda!");
+  return ContentService.createTextOutput("HTML & CSS Test Backend ishlamoqda!");
 }
 ```
 
