@@ -277,6 +277,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
+    // Fisher-Yates Shuffle Algorithm to randomize question order every test run
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // Randomize questions order on page load
+    shuffleArray(questions);
+
     // State Variables
     let currentIndex = 0;
     const userAnswers = {}; // Map question id (1..20) -> selected option key ('A', 'B', 'C', 'D')
@@ -342,7 +354,8 @@ document.addEventListener('DOMContentLoaded', () => {
         progressPercentage.textContent = `${pct}%`;
 
         // Update Title
-        questionTitle.textContent = q.title;
+        const cleanTitle = q.title.replace(/^\d+\.\s*/, '');
+        questionTitle.textContent = `${currentNum}. ${cleanTitle}`;
 
         // Update Code Block
         if (q.code) {
