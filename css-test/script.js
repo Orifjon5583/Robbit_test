@@ -341,6 +341,17 @@ document.addEventListener('DOMContentLoaded', () => {
         return esc;
     }
 
+    // Helper: Escape HTML special characters for safe option text rendering
+    function escapeHTML(str) {
+        if (!str) return '';
+        return str
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
     // Render Current Question
     function renderQuestion() {
         const q = questions[currentIndex];
@@ -384,7 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="radio-indicator">
                     <div class="radio-inner-dot"></div>
                 </div>
-                <div class="option-text">${optText}</div>
+                <div class="option-text">${escapeHTML(optText)}</div>
             `;
 
             // Click Handler
