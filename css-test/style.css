@@ -189,17 +189,19 @@ body {
 .subject-selector {
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    flex-wrap: wrap;
+    gap: 0.85rem;
     margin: 1.5rem 0 2rem 0;
 }
 
 .subject-btn {
     flex: 1;
-    max-width: 240px;
+    min-width: 150px;
+    max-width: 210px;
     background-color: #f8fafc;
     border: 2px solid var(--border-color);
     border-radius: var(--radius-md);
-    padding: 1.1rem 1rem;
+    padding: 1rem 0.85rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -222,12 +224,18 @@ body {
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
+.subject-btn.active.js {
+    border-color: #d97706;
+    background-color: #fffbebf5;
+    box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+}
+
 .subject-btn-icon {
-    font-size: 1.75rem;
+    font-size: 1.65rem;
 }
 
 .subject-btn-title {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-weight: 700;
     color: var(--dark-navy);
 }

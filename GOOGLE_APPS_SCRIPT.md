@@ -1,10 +1,10 @@
-# Google Apps Script va Sizning Google Sheets Jadvalingiz Integratsiyasi (HTML & CSS)
+# Google Apps Script va Sizning Google Sheets Jadvalingiz Integratsiyasi (HTML, CSS & JS)
 
 Siz taqdim etgan Google Sheets havolasi:  
 🔗 **[Google Sheets Jadvalingiz](https://docs.google.com/spreadsheets/d/1mG63yijZTh-QWUY_PR-ENDIZEifwD-E7oBGV8Wh5pbU/edit?usp=sharing)**  
 (Spreadsheet ID: `1mG63yijZTh-QWUY_PR-ENDIZEifwD-E7oBGV8Wh5pbU`)
 
-Ushbu yo'riqnoma orqali **HTML** va **CSS** test natijalarini to'g'ridan-to'g'ri **aynan shu jadvalingizga** yozib boradigan qilib ulaysiz.
+Ushbu yo'riqnoma orqali **HTML**, **CSS** va **JavaScript (JS)** test natijalarini to'g'ridan-to'g'ri **aynan shu jadvalingizga** yozib boradigan qilib ulaysiz.
 
 ---
 
@@ -26,11 +26,11 @@ Ushbu yo'riqnoma orqali **HTML** va **CSS** test natijalarini to'g'ridan-to'g'ri
 
 ```javascript
 /**
- * HTML & CSS Test Backend Server Code
+ * HTML, CSS & JS Test Backend Server Code
  * Target Sheet ID: 1mG63yijZTh-QWUY_PR-ENDIZEifwD-E7oBGV8Wh5pbU
  */
 
-// HTML Test javoblar kaliti (Natijalar o'quvchiga ko'rsatilmaydi)
+// HTML Test javoblar kaliti
 const ANSWER_KEY_HTML = {
   1: 'A',
   2: 'B',
@@ -54,7 +54,7 @@ const ANSWER_KEY_HTML = {
   20: 'B'
 };
 
-// CSS Test javoblar kaliti (Natijalar o'quvchiga ko'rsatilmaydi)
+// CSS Test javoblar kaliti
 const ANSWER_KEY_CSS = {
   1: 'B',
   2: 'C',
@@ -74,6 +74,30 @@ const ANSWER_KEY_CSS = {
   16: 'B',
   17: 'B',
   18: 'C',
+  19: 'B',
+  20: 'B'
+};
+
+// JavaScript (JS) Test javoblar kaliti
+const ANSWER_KEY_JS = {
+  1: 'A',
+  2: 'B',
+  3: 'B',
+  4: 'B',
+  5: 'B',
+  6: 'A',
+  7: 'A',
+  8: 'B',
+  9: 'B',
+  10: 'B',
+  11: 'B',
+  12: 'A',
+  13: 'A',
+  14: 'B',
+  15: 'B',
+  16: 'A',
+  17: 'A',
+  18: 'B',
   19: 'B',
   20: 'B'
 };
@@ -99,7 +123,12 @@ function doPost(e) {
     const userAnswers = data.answers || {};
 
     // Qaysi fan testiga qarab to'g'ri kalitni tanlash
-    const activeAnswerKey = (subject === 'CSS') ? ANSWER_KEY_CSS : ANSWER_KEY_HTML;
+    let activeAnswerKey = ANSWER_KEY_HTML;
+    if (subject === 'CSS') {
+      activeAnswerKey = ANSWER_KEY_CSS;
+    } else if (subject === 'JS') {
+      activeAnswerKey = ANSWER_KEY_JS;
+    }
 
     // Server tomonida to'g'ri javoblarni hisoblash
     let correctCount = 0;
@@ -138,7 +167,7 @@ function doPost(e) {
 }
 
 function doGet(e) {
-  return ContentService.createTextOutput("HTML & CSS Test Backend ishlamoqda!");
+  return ContentService.createTextOutput("HTML, CSS & JS Test Backend ishlamoqda!");
 }
 ```
 

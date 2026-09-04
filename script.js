@@ -556,8 +556,268 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
+    // 20 JavaScript Questions Data
+    const jsQuestions = [
+        {
+            id: 1,
+            topic: "Mantiqiy operatorlar (AND)",
+            title: "1. JavaScript da true && true mantiqiy (AND) ifodasining natijasi nima bo'ladi?",
+            options: [
+                "A) true",
+                "B) false",
+                "C) undefined",
+                "D) null"
+            ]
+        },
+        {
+            id: 2,
+            topic: "Mantiqiy operatorlar (AND)",
+            title: "2. JavaScript da true && false mantiqiy (AND) ifodasining natijasi nima bo'ladi?",
+            options: [
+                "A) true",
+                "B) false",
+                "C) NaN",
+                "D) undefined"
+            ]
+        },
+        {
+            id: 3,
+            topic: "Mantiqiy operatorlar (OR)",
+            title: "3. JavaScript da false || true mantiqiy (OR) ifodasining natijasi nima bo'ladi?",
+            options: [
+                "A) false",
+                "B) true",
+                "C) null",
+                "D) error"
+            ]
+        },
+        {
+            id: 4,
+            topic: "Mantiqiy operatorlar (OR)",
+            title: "4. JavaScript da false || false mantiqiy (OR) ifodasining natijasi nima bo'ladi?",
+            options: [
+                "A) true",
+                "B) false",
+                "C) 0",
+                "D) undefined"
+            ]
+        },
+        {
+            id: 5,
+            topic: "Mantiqiy operatorlar (NOT)",
+            title: "5. JavaScript da !true (inkor) ifodasining natijasi nima bo'ladi?",
+            options: [
+                "A) true",
+                "B) false",
+                "C) null",
+                "D) NaN"
+            ]
+        },
+        {
+            id: 6,
+            topic: "Mantiqiy operatorlar (NOT)",
+            title: "6. JavaScript da !false (inkor) ifodasining natijasi nima bo'ladi?",
+            options: [
+                "A) true",
+                "B) false",
+                "C) 0",
+                "D) undefined"
+            ]
+        },
+        {
+            id: 7,
+            topic: "Mantiqiy shartlar",
+            title: "7. Quyidagi JavaScript kodi konsolga nima chiqaradi?",
+            code: `let yosh = 20;
+console.log(yosh >= 18 && yosh <= 25);`,
+            options: [
+                "A) true",
+                "B) false",
+                "C) 20",
+                "D) undefined"
+            ]
+        },
+        {
+            id: 8,
+            topic: "Mantiqiy shartlar",
+            title: "8. Quyidagi JavaScript kodi konsolga nima chiqaradi?",
+            code: `let ball = 50;
+console.log(ball >= 60 || ball == 50);`,
+            options: [
+                "A) false",
+                "B) true",
+                "C) 50",
+                "D) NaN"
+            ]
+        },
+        {
+            id: 9,
+            topic: "If...Else Shart Operatori",
+            title: "9. Quyidagi JavaScript kodi ijro etilganda konsolga nima chiqadi?",
+            code: `let yosh = 16;
+
+if (yosh >= 18) {
+    console.log("Kirish mumkin");
+} else {
+    console.log("Kirish mumkin emas");
+}`,
+            options: [
+                "A) Kirish mumkin",
+                "B) Kirish mumkin emas",
+                "C) 16",
+                "D) Hech narsa chiqmaydi"
+            ]
+        },
+        {
+            id: 10,
+            topic: "Murakkab Shartlar",
+            title: "10. Quyidagi JavaScript kodi ijro etilganda konsolga nima chiqadi?",
+            code: `let yosh = 20;
+let karta = true;
+
+if (yosh >= 18 && karta) {
+    console.log("Kirish mumkin");
+} else {
+    console.log("Kirish mumkin emas");
+}`,
+            options: [
+                "A) Kirish mumkin emas",
+                "B) Kirish mumkin",
+                "C) true",
+                "D) error"
+            ]
+        },
+        {
+            id: 11,
+            topic: "OR Operatori Sharti",
+            title: "11. Quyidagi JavaScript kodi ijro etilganda konsolga nima chiqadi?",
+            code: `let kun = "shanba";
+
+if (kun == "shanba" || kun == "yakshanba") {
+    console.log("Dam olish");
+} else {
+    console.log("Ish kuni");
+}`,
+            options: [
+                "A) Ish kuni",
+                "B) Dam olish",
+                "C) shanba",
+                "D) undefined"
+            ]
+        },
+        {
+            id: 12,
+            topic: "O'zgaruvchilar (let)",
+            title: "12. JavaScript da let kalit so'zi nima uchun ishlatiladi?",
+            options: [
+                "A) O'zgaruvchi yaratish uchun",
+                "B) Funksiyani o'chirish uchun",
+                "C) Shrift rangini o'zgartirish uchun",
+                "D) HTML tegini tanlash uchun"
+            ]
+        },
+        {
+            id: 13,
+            topic: "O'zgaruvchilar (const)",
+            title: "13. JavaScript da const nima va u let dan nimasi bilan farq qiladi?",
+            options: [
+                "A) Qiymatini keyinchalik qayta o'zgartirib bo'lmaydigan o'zgaruvchi (konstanta)",
+                "B) Har doim matn saqlaydigan o'zgaruvchi",
+                "C) Faqat sonlar uchun ishlatiladigan o'zgaruvchi",
+                "D) Faqat HTML tegida ishlaydigan xossa"
+            ]
+        },
+        {
+            id: 14,
+            topic: "Ma'lumot turlari (String)",
+            title: "14. JavaScript da String ma'lumot turi nimani anglatadi?",
+            options: [
+                "A) Sonli ma'lumot (Masalan: 100)",
+                "B) Matnli ma'lumot (Masalan: \"Salom\")",
+                "C) Mantiqiy true/false qiymati",
+                "D) Bo'sh qiymat (null)"
+            ]
+        },
+        {
+            id: 15,
+            topic: "Ma'lumot turlari (Number)",
+            title: "15. JavaScript da Number ma'lumot turi nimani anglatadi?",
+            options: [
+                "A) Matnli ma'lumot",
+                "B) Sonli ma'lumot (Masalan: 25 yoki 3.14)",
+                "C) Massiv turi",
+                "D) Obyekt turi"
+            ]
+        },
+        {
+            id: 16,
+            topic: "Massivlar (Array)",
+            title: "16. JavaScript da Array (Massiv) nima va u qanday yoziladi?",
+            code: `let mevalar = ["olma", "banan", "anor"];`,
+            options: [
+                "A) Bir nechta qiymatni bitta o'zgaruvchida kvadrat qavslar [] ichida saqlash usuli",
+                "B) Faqat bitta son saqlaydigan obyekt",
+                "C) Matnni katta harflarga o'tkazish funksiyasi",
+                "D) HTML teglarini bog'lovchi xossa"
+            ]
+        },
+        {
+            id: 17,
+            topic: "Obyektlar (Object)",
+            title: "17. JavaScript da Object (Obyekt) nima va ma'lumotlar unda qanday ko'rinishda saqlanadi?",
+            code: `let user = {
+    ism: "Ali",
+    yosh: 20
+};`,
+            options: [
+                "A) Ma'lumotlarni key: value (kalit: qiymat) ko'rinishida saqlaydi",
+                "B) Ma'lumotlarni faqat son shaklida saqlaydi",
+                "C) Obyekt faqat HTML formalarida ishlaydi",
+                "D) Obyekt qiymatlarini o'zgartirib bo'lmaydi"
+            ]
+        },
+        {
+            id: 18,
+            topic: "Typeof Operatori",
+            title: "18. JavaScript da typeof 42 ifodasi nima natija beradi?",
+            code: `console.log(typeof 42);`,
+            options: [
+                "A) \"string\"",
+                "B) \"number\"",
+                "C) \"boolean\"",
+                "D) \"object\""
+            ]
+        },
+        {
+            id: 19,
+            topic: "Funksiyalar (Function)",
+            title: "19. JavaScript da standart funksiya e'lon qilish sintaksisi qaysi?",
+            code: `function salomBer() {
+    console.log("Salom!");
+}`,
+            options: [
+                "A) create salomBer() {}",
+                "B) function salomBer() {}",
+                "C) def salomBer() {}",
+                "D) fn salomBer() {}"
+            ]
+        },
+        {
+            id: 20,
+            topic: "Type Coercion",
+            title: "20. JavaScript da console.log(\"5\" + 2) kodi konsolga nima chiqaradi?",
+            code: `console.log("5" + 2);`,
+            options: [
+                "A) 7",
+                "B) \"52\" (matnli birlashuv)",
+                "C) NaN",
+                "D) SyntaxError"
+            ]
+        }
+    ];
+
     // State Variables & Subject Data
-    let currentSubject = 'HTML'; // 'HTML' or 'CSS'
+    let currentSubject = 'HTML'; // 'HTML', 'CSS', or 'JS'
     let questions = [];
     let currentIndex = 0;
     const userAnswers = {}; // Map question id (1..20) -> selected option key ('A', 'B', 'C', 'D')
@@ -576,6 +836,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const btnSelectHtml = document.getElementById('btn-select-html');
     const btnSelectCss = document.getElementById('btn-select-css');
+    const btnSelectJs = document.getElementById('btn-select-js');
     const activeSubjectBadge = document.getElementById('active-subject-badge');
     const currentSubjectTag = document.getElementById('current-subject-tag');
     const codeLangLabel = document.getElementById('code-lang-label');
@@ -626,23 +887,35 @@ document.addEventListener('DOMContentLoaded', () => {
             questions = shuffleArray(htmlQuestions);
             if (btnSelectHtml) btnSelectHtml.classList.add('active');
             if (btnSelectCss) btnSelectCss.classList.remove('active');
+            if (btnSelectJs) { btnSelectJs.classList.remove('active'); btnSelectJs.classList.remove('js'); }
             if (startBtnLabel) startBtnLabel.textContent = 'HTML TESTINI BOSHLASH';
             if (activeSubjectBadge) activeSubjectBadge.textContent = '📄 HTML Test';
             if (currentSubjectTag) currentSubjectTag.textContent = 'HTML';
             if (codeLangLabel) codeLangLabel.textContent = 'html';
-        } else {
+        } else if (subjectName === 'CSS') {
             questions = shuffleArray(cssQuestions);
             if (btnSelectCss) btnSelectCss.classList.add('active');
             if (btnSelectHtml) btnSelectHtml.classList.remove('active');
+            if (btnSelectJs) { btnSelectJs.classList.remove('active'); btnSelectJs.classList.remove('js'); }
             if (startBtnLabel) startBtnLabel.textContent = 'CSS TESTINI BOSHLASH';
             if (activeSubjectBadge) activeSubjectBadge.textContent = '🎨 CSS Test';
             if (currentSubjectTag) currentSubjectTag.textContent = 'CSS';
             if (codeLangLabel) codeLangLabel.textContent = 'css';
+        } else if (subjectName === 'JS') {
+            questions = shuffleArray(jsQuestions);
+            if (btnSelectJs) { btnSelectJs.classList.add('active'); btnSelectJs.classList.add('js'); }
+            if (btnSelectHtml) btnSelectHtml.classList.remove('active');
+            if (btnSelectCss) btnSelectCss.classList.remove('active');
+            if (startBtnLabel) startBtnLabel.textContent = 'JAVASCRIPT TESTINI BOSHLASH';
+            if (activeSubjectBadge) activeSubjectBadge.textContent = '⚡ JavaScript Test';
+            if (currentSubjectTag) currentSubjectTag.textContent = 'JS';
+            if (codeLangLabel) codeLangLabel.textContent = 'javascript';
         }
     }
 
     if (btnSelectHtml) btnSelectHtml.addEventListener('click', () => setSubject('HTML'));
     if (btnSelectCss) btnSelectCss.addEventListener('click', () => setSubject('CSS'));
+    if (btnSelectJs) btnSelectJs.addEventListener('click', () => setSubject('JS'));
 
     // Initialize Default Subject
     setSubject('HTML');
